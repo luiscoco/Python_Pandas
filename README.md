@@ -51,6 +51,27 @@ young_people = df[df['Age'] < 30]
 print(young_people)
 ```
 
+```csv
+Age
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+34
+35
+36
+37
+77
+88
+99
+```
+
 ## 2. Data Manipulation:
 
 Pandas provides a wide range of functions for data manipulation, including selection, filtering, merging, grouping, sorting, and more
