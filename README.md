@@ -742,39 +742,142 @@ if __name__ == "__main__":
 Pandas seamlessly interoperates with NumPy and SciPy, allowing you to convert between DataFrame and NumPy array or SciPy sparse matrix
 
 ```python
-# Converting DataFrame to NumPy array
-numpy_array = df.values
-
-# Converting NumPy array to DataFrame
-df_from_array = pd.DataFrame(numpy_array, columns=['A', 'B', 'C'])
-
-# Converting DataFrame to SciPy sparse matrix
+import pandas as pd
+import numpy as np
 from scipy.sparse import csr_matrix
-sparse_matrix = csr_matrix(df.values)
+
+def main():
+    # Create a sample DataFrame
+    data = {
+        'A': [1, 2, 3],
+        'B': [4, 5, 6],
+        'C': [7, 8, 9]
+    }
+    df = pd.DataFrame(data)
+    print("Original DataFrame:")
+    print(df)
+    print("\n")
+
+    # Converting DataFrame to NumPy array
+    numpy_array = df.values
+    print("Converted NumPy Array:")
+    print(numpy_array)
+    print("\n")
+
+    # Converting NumPy array back to DataFrame
+    df_from_array = pd.DataFrame(numpy_array, columns=['A', 'B', 'C'])
+    print("DataFrame from NumPy Array:")
+    print(df_from_array)
+    print("\n")
+
+    # Converting DataFrame to SciPy sparse matrix
+    sparse_matrix = csr_matrix(df.values)
+    print("SciPy Sparse Matrix:")
+    print(sparse_matrix)
+    print("\n")
+
+if __name__ == "__main__":
+    main()
 ```
 
-These advanced features extend the capabilities of Pandas for handling various data manipulation tasks effectively
-
-Experimenting with these features in VSCode with different datasets will enhance your data analysis skills
+![image](https://github.com/luiscoco/Python_Pandas/assets/32194879/33179a3a-2f7f-46cd-a316-04745c92e9ac)
 
 ## 18. Time Series Analysis:
 
 Conducting time series analysis often involves resampling, shifting, and rolling window calculations
 
 ```python
-# Generating time series data
 import numpy as np
-date_range = pd.date_range(start='2024-01-01', end='2024-12-31', freq='D')
-time_series = pd.Series(np.random.randn(len(date_range)), index=date_range)
+import pandas as pd
 
-# Resampling to monthly frequency
-monthly_data = time_series.resample('M').mean()
+def generate_time_series():
+    # Generating time series data
+    date_range = pd.date_range(start='2024-01-01', end='2024-12-31', freq='D')
+    time_series = pd.Series(np.random.randn(len(date_range)), index=date_range)
+    return time_series
 
-# Shifting data by a certain number of periods
-shifted_data = time_series.shift(1)
+def resample_monthly(time_series):
+    # Resampling to monthly frequency
+    monthly_data = time_series.resample('M').mean()
+    return monthly_data
 
-# Calculating rolling mean over a window of 7 days
-rolling_mean = time_series.rolling(window=7).mean()
+def shift_data(time_series):
+    # Shifting data by one period
+    shifted_data = time_series.shift(1)
+    return shifted_data
+
+def calculate_rolling_mean(time_series):
+    # Calculating rolling mean over a window of 7 days
+    rolling_mean = time_series.rolling(window=7).mean()
+    return rolling_mean
+
+if __name__ == "__main__":
+    # Generate time series data
+    time_series = generate_time_series()
+
+    # Resample data to monthly frequency
+    monthly_data = resample_monthly(time_series)
+
+    # Shift the data by one period
+    shifted_data = shift_data(time_series)
+
+    # Calculate rolling mean over a 7-day window
+    rolling_mean = calculate_rolling_mean(time_series)
+
+    # Print the results
+    print("Monthly Data:")
+    print(monthly_data)
+    print("\nShifted Data:")
+    print(shifted_data)
+    print("\nRolling Mean (7 days):")
+    print(rolling_mean)
+```
+
+**output**
+
+```
+Monthly Data:
+2024-01-31    0.160074  
+2024-02-29   -0.311636  
+2024-03-31    0.234325  
+2024-04-30    0.185597  
+2024-05-31    0.261043  
+2024-06-30   -0.026390  
+2024-07-31    0.083969  
+2024-08-31    0.009491  
+2024-09-30   -0.168149  
+2024-10-31    0.413047  
+2024-11-30    0.176617  
+2024-12-31    0.216555  
+Freq: ME, dtype: float64
+
+Shifted Data:
+2024-01-01         NaN  
+2024-01-02    0.972091  
+2024-01-03   -0.170409  
+2024-01-04    1.480312
+2024-01-05    0.573221
+                ...
+2024-12-27    0.111897
+2024-12-28    0.399308
+2024-12-29    0.391102
+2024-12-30   -0.185530
+2024-12-31   -1.906845
+Freq: D, Length: 366, dtype: float64
+
+Rolling Mean (7 days):
+2024-01-01         NaN
+2024-01-02         NaN
+2024-01-03         NaN
+2024-01-04         NaN
+2024-01-05         NaN
+                ...
+2024-12-27    0.522674
+2024-12-28    0.524076
+2024-12-29    0.191457
+2024-12-30   -0.025446
+2024-12-31   -0.327884
+Freq: D, Length: 366, dtype: float64
 ```
 
 ## 19. Handling Large Datasets:
@@ -782,46 +885,116 @@ rolling_mean = time_series.rolling(window=7).mean()
 When working with large datasets, memory optimization and efficient processing become crucial
 
 ```python
-# Reading large dataset in chunks
-chunk_size = 100000
-chunk_iter = pd.read_csv('large_data.csv', chunksize=chunk_size)
-for chunk in chunk_iter:
-    process_chunk(chunk)
+import pandas as pd
 
-# Optimizing memory usage
-df['Category'] = df['Category'].astype('category')
+# Function to process each chunk
+
+def process_chunk(chunk):
+    # Placeholder for processing logic. Modify this according to your needs.
+    # For example, you might want to print the first few rows of each chunk:
+    print(chunk.head())
+
+def read_and_process_in_chunks(file_path, chunk_size):
+    # Reading the CSV file in chunks
+    chunk_iter = pd.read_csv(file_path, chunksize=chunk_size)
+
+    for chunk in chunk_iter:
+        # Optionally, optimize memory usage for specific columns
+        if 'Category' in chunk.columns:
+            chunk['Category'] = chunk['Category'].astype('category')
+
+        # Process each chunk
+        process_chunk(chunk)
+
+if __name__ == "__main__":
+    # File path for the large dataset
+    file_path = 'large_data.csv'
+
+    # Size of each chunk
+    chunk_size = 100000
+
+    # Function call to read and process the file
+    read_and_process_in_chunks(file_path, chunk_size)
 ```
+
+![image](https://github.com/luiscoco/Python_Pandas/assets/32194879/a79926b0-b4e8-4f15-9b95-dda5939d3db8)
 
 ## 20. Combining Data from Multiple Sources:
 
 Integrating data from different sources and formats can require complex merging and joining operations
 
 ```python
+import pandas as pd
+import sqlite3
+
 # Merging data from multiple CSV files
-file1 = pd.read_csv('data1.csv')
-file2 = pd.read_csv('data2.csv')
-merged_data = pd.merge(file1, file2, on='key')
+
+def merge_csv_files():
+    file1 = pd.read_csv('data1.csv')
+    file2 = pd.read_csv('data2.csv')
+    merged_data = pd.merge(file1, file2, on='key')
+    print("Merged CSV data:")
+    print(merged_data)
 
 # Joining data from SQL database
-import sqlite3
-conn = sqlite3.connect('database.db')
-query = "SELECT * FROM table1 JOIN table2 ON table1.key = table2.key"
-sql_data = pd.read_sql_query(query, conn)
+
+def join_sql_data():
+    conn = sqlite3.connect('database.db')
+    query = "SELECT * FROM table1 JOIN table2 ON table1.key = table2.key"
+    sql_data = pd.read_sql_query(query, conn)
+    print("SQL joined data:")
+    print(sql_data)
+
+if __name__ == "__main__":
+    merge_csv_files()
+    join_sql_data()
 ```
+
+**data1.csv**
+
+```
+key,data1
+1,apple
+2,banana
+3,cherry
+```
+
+**data2.csv**
+
+```
+key,data2
+1,alpha
+2,beta
+3,gamma
+```
+
+![image](https://github.com/luiscoco/Python_Pandas/assets/32194879/0c1406e5-fd17-4dfe-bc6c-38a26678802d)
 
 ## 21. Handling Hierarchical Data:
 
 Working with hierarchical or nested data structures requires advanced indexing and manipulation techniques
 
 ```python
-# Creating a MultiIndex DataFrame
-arrays = [['A', 'A', 'B', 'B'], [1, 2, 1, 2]]
-multi_index = pd.MultiIndex.from_arrays(arrays, names=('First', 'Second'))
-df_multiindex = pd.DataFrame({'Values': [1, 2, 3, 4]}, index=multi_index)
+import pandas as pd
 
-# Aggregating data at different levels of MultiIndex
-level_mean = df_multiindex.groupby(level='First').mean()
+def main():
+    # Creating a MultiIndex DataFrame
+    arrays = [['A', 'A', 'B', 'B'], [1, 2, 1, 2]]
+    multi_index = pd.MultiIndex.from_arrays(arrays, names=('First', 'Second'))
+    df_multiindex = pd.DataFrame({'Values': [1, 2, 3, 4]}, index=multi_index)
+    print("Original DataFrame with MultiIndex:")
+    print(df_multiindex)
+
+    # Aggregating data at different levels of MultiIndex
+    level_mean = df_multiindex.groupby(level='First').mean()
+    print("\nMean of values grouped by the 'First' level of the MultiIndex:")
+    print(level_mean)
+
+if __name__ == "__main__":
+    main()
 ```
+
+![image](https://github.com/luiscoco/Python_Pandas/assets/32194879/dda19022-0f7d-4d46-b171-f24d07343c13)
 
 ## 22. Handling Outliers and Anomalies:
 
