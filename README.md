@@ -1,5 +1,11 @@
 # Python a brifef introduction to Pandas
 
+https://pandas.pydata.org/
+
+https://pandas.pydata.org/docs/getting_started/index.html
+
+https://pandas.pydata.org/docs/user_guide/index.html
+
 **Pandas** is a powerful library in Python used for **data manipulation and analysis**
 
 It provides data structures and functions that make working with structured data easy and intuitive
