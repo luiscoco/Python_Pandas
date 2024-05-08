@@ -975,14 +975,26 @@ key,data2
 Working with hierarchical or nested data structures requires advanced indexing and manipulation techniques
 
 ```python
-# Creating a MultiIndex DataFrame
-arrays = [['A', 'A', 'B', 'B'], [1, 2, 1, 2]]
-multi_index = pd.MultiIndex.from_arrays(arrays, names=('First', 'Second'))
-df_multiindex = pd.DataFrame({'Values': [1, 2, 3, 4]}, index=multi_index)
+import pandas as pd
 
-# Aggregating data at different levels of MultiIndex
-level_mean = df_multiindex.groupby(level='First').mean()
+def main():
+    # Creating a MultiIndex DataFrame
+    arrays = [['A', 'A', 'B', 'B'], [1, 2, 1, 2]]
+    multi_index = pd.MultiIndex.from_arrays(arrays, names=('First', 'Second'))
+    df_multiindex = pd.DataFrame({'Values': [1, 2, 3, 4]}, index=multi_index)
+    print("Original DataFrame with MultiIndex:")
+    print(df_multiindex)
+
+    # Aggregating data at different levels of MultiIndex
+    level_mean = df_multiindex.groupby(level='First').mean()
+    print("\nMean of values grouped by the 'First' level of the MultiIndex:")
+    print(level_mean)
+
+if __name__ == "__main__":
+    main()
 ```
+
+![image](https://github.com/luiscoco/Python_Pandas/assets/32194879/dda19022-0f7d-4d46-b171-f24d07343c13)
 
 ## 22. Handling Outliers and Anomalies:
 
