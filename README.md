@@ -381,11 +381,77 @@ create_time_series()
 Pandas provides support for categorical data types, which can improve performance and memory usage for certain operations
 
 ```python
-# Converting a column to categorical
-df['Category'] = df['Category'].astype('category')
+import pandas as pd
 
-# Accessing category codes
-df['Category_code'] = df['Category'].cat.codes
+def convert_to_categorical(csv_input_path, csv_output_path):
+    """
+    Convert a 'Category' column in a CSV file to categorical data type and
+    add a new column with the corresponding category codes.
+    
+    Parameters:
+    csv_input_path (str): Path to the input CSV file.
+    csv_output_path (str): Path to save the output CSV file.
+    """
+    # Load the data
+    df = pd.read_csv(csv_input_path)
+
+    # Check if the 'Category' column exists
+    if 'Category' not in df.columns:
+        raise ValueError("CSV file does not contain a 'Category' column.")
+
+    # Convert 'Category' column to categorical
+    df['Category'] = df['Category'].astype('category')
+
+    # Create a new column with category codes
+    df['Category_code'] = df['Category'].cat.codes
+
+    # Save the modified DataFrame back to a CSV file
+    df.to_csv(csv_output_path, index=False)
+    print(f"File saved successfully as {csv_output_path}")
+
+def main():
+    import sys
+    if len(sys.argv) != 3:
+        print("Usage: python this_script.py <input_csv_path> <output_csv_path>")
+        return
+
+    input_csv_path = sys.argv[1]
+    output_csv_path = sys.argv[2]
+
+    try:
+        convert_to_categorical(input_csv_path, output_csv_path)
+    except Exception as e:
+        print(f"Error: {str(e)}")
+
+
+if __name__ == "__main__":
+    main()
+```
+
+**ExampleCategories.csv**
+```csv
+Category
+Electronics
+Furniture
+Electronics
+Clothing
+Furniture
+```
+
+**ExampleCategories_output.csv**
+```csv
+Category,Category_code
+Electronics,1
+Furniture,2
+Electronics,1
+Clothing,0
+Furniture,2
+```
+
+To run the application execute the following command:
+
+```
+python pandaSample9.py ExampleCategories.csv ExampleCategories_output.csv
 ```
 
 ## 10. Combining and Merging Data:
@@ -393,19 +459,39 @@ df['Category_code'] = df['Category'].cat.codes
 Pandas offers various functions for combining and merging DataFrames, including concatenation, joining, and merging on specific columns or indices
 
 ```python
+import pandas as pd
+
+# Creating sample dataframes
+data1 = {'Key': ['A', 'B', 'C'], 'Value1': [1, 2, 3]}
+data2 = {'Key': ['A', 'B', 'D'], 'Value2': [4, 5, 6]}
+
+df1 = pd.DataFrame(data1)
+df2 = pd.DataFrame(data2)
+
 # Concatenating DataFrames
+# Note: Concatenation combines DataFrames along an axis, default is rows (axis=0)
 concatenated_df = pd.concat([df1, df2])
+print("Concatenated DataFrame:")
+print(concatenated_df)
 
 # Joining DataFrames
-merged_df = df1.join(df2, on='Key')
+# Note: 'join' by default uses the index for joining, here we join on a common column using merge
+# for demonstration as join needs setting index or using 'lsuffix' and 'rsuffix' when columns overlap.
+joined_df = df1.set_index('Key').join(
+    df2.set_index('Key'), lsuffix='_left', rsuffix='_right')
+print("\nJoined DataFrame:")
+print(joined_df)
 
 # Merging DataFrames
+# Note: 'merge' is used for combining DataFrames based on common columns or indices
 merged_df = pd.merge(df1, df2, on='Key')
+print("\nMerged DataFrame:")
+print(merged_df)
+
+# You can run this script in any environment where Python and pandas are installed
 ```
 
-These are some of the advanced features of Pandas that allow you to handle and manipulate data efficiently
-
-Experimenting with these features in VSCode with real-world datasets will enhance your understanding and proficiency with Pandas
+![image](https://github.com/luiscoco/Python_Pandas/assets/32194879/c37a2f12-2fe1-4b45-b11d-45a476adb65d)
 
 ## 11. Handling Text Data:
 
