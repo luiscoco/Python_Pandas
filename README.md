@@ -491,9 +491,7 @@ print(merged_df)
 # You can run this script in any environment where Python and pandas are installed
 ```
 
-These are some of the advanced features of Pandas that allow you to handle and manipulate data efficiently
-
-Experimenting with these features in VSCode with real-world datasets will enhance your understanding and proficiency with Pandas
+![image](https://github.com/luiscoco/Python_Pandas/assets/32194879/c37a2f12-2fe1-4b45-b11d-45a476adb65d)
 
 ## 11. Handling Text Data:
 
