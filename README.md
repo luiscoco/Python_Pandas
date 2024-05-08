@@ -924,17 +924,51 @@ if __name__ == "__main__":
 Integrating data from different sources and formats can require complex merging and joining operations
 
 ```python
+import pandas as pd
+import sqlite3
+
 # Merging data from multiple CSV files
-file1 = pd.read_csv('data1.csv')
-file2 = pd.read_csv('data2.csv')
-merged_data = pd.merge(file1, file2, on='key')
+
+def merge_csv_files():
+    file1 = pd.read_csv('data1.csv')
+    file2 = pd.read_csv('data2.csv')
+    merged_data = pd.merge(file1, file2, on='key')
+    print("Merged CSV data:")
+    print(merged_data)
 
 # Joining data from SQL database
-import sqlite3
-conn = sqlite3.connect('database.db')
-query = "SELECT * FROM table1 JOIN table2 ON table1.key = table2.key"
-sql_data = pd.read_sql_query(query, conn)
+
+def join_sql_data():
+    conn = sqlite3.connect('database.db')
+    query = "SELECT * FROM table1 JOIN table2 ON table1.key = table2.key"
+    sql_data = pd.read_sql_query(query, conn)
+    print("SQL joined data:")
+    print(sql_data)
+
+if __name__ == "__main__":
+    merge_csv_files()
+    join_sql_data()
 ```
+
+**data1.csv**
+
+```
+key,data1
+1,apple
+2,banana
+3,cherry
+```
+
+**data2.csv**
+
+```
+key,data2
+1,alpha
+2,beta
+3,gamma
+```
+
+![image](https://github.com/luiscoco/Python_Pandas/assets/32194879/0c1406e5-fd17-4dfe-bc6c-38a26678802d)
 
 ## 21. Handling Hierarchical Data:
 
