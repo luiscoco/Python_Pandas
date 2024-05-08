@@ -613,10 +613,31 @@ if __name__ == "__main__":
 Pandas provides methods to optimize memory usage, which can be helpful when working with large datasets
 
 ```python
-# Optimizing memory usage
-df_optimized = df.copy()
-df_optimized['Category'] = df_optimized['Category'].astype('category')
+import pandas as pd
+
+def load_and_optimize(path):
+    # Load the data
+    df = pd.read_csv(path)
+    print("Memory usage before optimization:")
+    print(df.memory_usage(deep=True))
+
+    # Optimize memory usage by converting 'Category' to 'category' type
+    df['Category'] = df['Category'].astype('category')
+
+    print("\nMemory usage after optimization:")
+    print(df.memory_usage(deep=True))
+
+    return df
+
+if __name__ == "__main__":
+    # Path to the CSV file
+    path = 'sampleData.csv'
+    optimized_df = load_and_optimize(path)
+    print("\nOptimized DataFrame:")
+    print(optimized_df)
 ```
+
+![image](https://github.com/luiscoco/Python_Pandas/assets/32194879/3bf43965-fb56-4748-bb94-4b8f49d459e7)
 
 ## 15. Handling MultiIndex DataFrames:
 
