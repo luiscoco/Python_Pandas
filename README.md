@@ -498,17 +498,53 @@ print(merged_df)
 Pandas provides string methods to efficiently manipulate text data in DataFrame columns, such as splitting, stripping, replacing, and extracting substrings
 
 ```python
-# Splitting text into multiple columns
-df['Name'].str.split(' ')
+import pandas as pd
 
-# Stripping whitespace
-df['Text'].str.strip()
 
-# Replacing values
-df['Text'].str.replace('old_value', 'new_value')
+def process_data(input_file, output_file):
+    # Load data from CSV
+    df = pd.read_csv(input_file)
 
-# Extracting substrings
-df['Email'].str.extract(r'(\w+)@(\w+)\.com')
+    # Splitting the 'Name' column into multiple columns
+    df['Name_split'] = df['Name'].str.split(' ')
+
+    # Stripping whitespace from the 'Text' column
+    df['Text'] = df['Text'].str.strip()
+
+    # Replacing old values with new values in the 'Text' column
+    df['Text'] = df['Text'].str.replace('old_value', 'new_value', regex=False)
+
+    # Extracting substrings from the 'Email' column
+    email_parts = df['Email'].str.extract(r'(\w+)@([\w.]+)')
+    df['Email_username'] = email_parts[0]
+    df['Email_domain'] = email_parts[1]
+
+    # Save the modified DataFrame to a new CSV file
+    df.to_csv(output_file, index=False)
+
+
+if __name__ == "__main__":
+    input_csv = 'inputText.csv'  # Name of the input CSV file
+    output_csv = 'outputText.csv'  # Name of the output CSV file
+    process_data(input_csv, output_csv)
+```
+
+**inputText.csv**
+
+```csv
+Name,Text,Email
+John Doe, This is some text with old_value. ,john.doe@example.com
+Jane Smith,Another text with old_value to replace.,jane.smith@sample.com
+Bob Johnson,  Text without the old_value. ,bob.johnson@test.com
+```
+
+**outputText.csv**
+
+```csv
+Name,Text,Email,Name_split,Email_username,Email_domain
+John Doe,This is some text with new_value.,john.doe@example.com,"['John', 'Doe']",doe,example.com
+Jane Smith,Another text with new_value to replace.,jane.smith@sample.com,"['Jane', 'Smith']",smith,sample.com
+Bob Johnson,Text without the new_value.,bob.johnson@test.com,"['Bob', 'Johnson']",johnson,test.com
 ```
 
 ## 12. Applying Functions Element-wise:
@@ -516,12 +552,28 @@ df['Email'].str.extract(r'(\w+)@(\w+)\.com')
 You can apply custom or built-in functions element-wise to DataFrame columns or rows using the apply() method
 
 ```python
-# Applying a custom function
+import pandas as pd
+
+# Define a custom function to square values
+
 def square(x):
     return x ** 2
 
+# Create a sample DataFrame
+data = {
+    'Name': ['Alice', 'Bob', 'Charlie', 'David', 'Eva'],
+    'Age': [25, 30, 35, 40, 45]
+}
+df = pd.DataFrame(data)
+
+# Apply the square function to the 'Age' column
 df['Age_squared'] = df['Age'].apply(square)
+
+# Display the original DataFrame and the new column
+print(df)
 ```
+
+![image](https://github.com/luiscoco/Python_Pandas/assets/32194879/c36c4a29-19c9-45f6-b432-81a9b616669c)
 
 ## 13. Handling Time Zones:
 
