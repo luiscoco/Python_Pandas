@@ -28,6 +28,8 @@ df = pd.DataFrame(data)
 print(df)
 ```
 
+![image](https://github.com/luiscoco/Python_Pandas/assets/32194879/c57458e2-1e7d-4566-8414-018644d83667)
+
 ## 1. Reading and Writing Data:
 
 Pandas can read data from various file formats like CSV, Excel, JSON, SQL databases, etc
