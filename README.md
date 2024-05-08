@@ -448,6 +448,12 @@ Clothing,0
 Furniture,2
 ```
 
+To run the application execute the following command:
+
+```
+python pandaSample9.py ExampleCategories.csv ExampleCategories_output.csv
+```
+
 ## 10. Combining and Merging Data:
 
 Pandas offers various functions for combining and merging DataFrames, including concatenation, joining, and merging on specific columns or indices
