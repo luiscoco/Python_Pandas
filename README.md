@@ -37,11 +37,18 @@ Pandas can read data from various file formats like CSV, Excel, JSON, SQL databa
 It also allows writing data back to these formats
 
 ```python
-# Reading from CSV
-df = pd.read_csv('data.csv')
+import pandas as pd
 
-# Writing to CSV
-df.to_csv('output.csv', index=False)
+# Reading from CSV
+df = pd.read_csv('Book1.csv')
+
+# Selecting a column
+ages = df['Age']
+
+# Filtering data
+young_people = df[df['Age'] < 30]
+
+print(young_people)
 ```
 
 ## 2. Data Manipulation:
@@ -49,11 +56,18 @@ df.to_csv('output.csv', index=False)
 Pandas provides a wide range of functions for data manipulation, including selection, filtering, merging, grouping, sorting, and more
 
 ```python
+import pandas as pd
+
+# Reading from CSV
+df = pd.read_csv('Book1.csv')
+
 # Selecting a column
 ages = df['Age']
 
 # Filtering data
 young_people = df[df['Age'] < 30]
+
+print(young_people)
 
 # Merging DataFrames
 df1 = pd.DataFrame({'A': ['A0', 'A1', 'A2'],
@@ -61,6 +75,11 @@ df1 = pd.DataFrame({'A': ['A0', 'A1', 'A2'],
 df2 = pd.DataFrame({'C': ['C0', 'C1', 'C2'],
                     'D': ['D0', 'D1', 'D2']})
 merged_df = pd.concat([df1, df2], axis=1)
+
+print(merged_df)
+
+# Writing to CSV
+merged_df.to_csv('output.csv', index=False)
 ```
 
 ## 3. Data Analysis:
@@ -68,11 +87,23 @@ merged_df = pd.concat([df1, df2], axis=1)
 Pandas provides statistical and mathematical functions to analyze data, such as mean, median, standard deviation, correlation, etc
 
 ```python
+import pandas as pd
+
+# Reading from CSV
+df = pd.read_csv('Book1.csv')
+
+# Selecting a column
+ages = df['Age']
+
 # Calculating mean
 mean_age = df['Age'].mean()
 
 # Calculating correlation
 correlation = df.corr()
+
+print('Mean_age:', mean_age)  # corrected print statement
+
+print('Correlation: ', correlation)
 ```
 
 ## 4. Data Visualization Integration:
@@ -81,12 +112,15 @@ Pandas integrates well with popular data visualization libraries like Matplotlib
 
 ```python
 import matplotlib.pyplot as plt
+import pandas as pd
 
-# Plotting
-df.plot(x='Name', y='Age', kind='bar')
+# Reading from CSV
+df = pd.read_csv('Book1.csv')
+
+# Plotting with index as x-axis
+df.plot(x=None, y='Age', kind='bar')
 plt.show()
 ```
-
 
 ## 5. Handling Missing Data:
 
