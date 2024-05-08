@@ -580,12 +580,33 @@ print(df)
 Pandas supports time zone handling, allowing you to localize and convert datetimes between different time zones
 
 ```python
-# Localizing datetimes
-localized_dt = df['Timestamp'].dt.tz_localize('UTC')
+import pandas as pd
 
-# Converting time zones
-converted_dt = localized_dt.dt.tz_convert('America/New_York')
+def main():
+    # Sample data creation
+    data = {'Timestamp': ['2023-05-08 14:30',
+                          '2023-05-08 15:45', '2023-05-08 16:00']}
+    df = pd.DataFrame(data)
+
+    # Convert the 'Timestamp' column to datetime
+    df['Timestamp'] = pd.to_datetime(df['Timestamp'])
+
+    # Localizing datetimes to UTC
+    localized_dt = df['Timestamp'].dt.tz_localize('UTC')
+    print("Localized to UTC:")
+    print(localized_dt)
+
+    # Converting time zones to America/New_York
+    converted_dt = localized_dt.dt.tz_convert('America/New_York')
+    print("\nConverted to America/New_York Timezone:")
+    print(converted_dt)
+
+
+if __name__ == "__main__":
+    main()
 ```
+
+![image](https://github.com/luiscoco/Python_Pandas/assets/32194879/14bf2acd-d4fc-42df-868b-2f508e67ecd2)
 
 ## 14. Memory Optimization:
 
