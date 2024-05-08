@@ -580,22 +580,64 @@ print(df)
 Pandas supports time zone handling, allowing you to localize and convert datetimes between different time zones
 
 ```python
-# Localizing datetimes
-localized_dt = df['Timestamp'].dt.tz_localize('UTC')
+import pandas as pd
 
-# Converting time zones
-converted_dt = localized_dt.dt.tz_convert('America/New_York')
+def main():
+    # Sample data creation
+    data = {'Timestamp': ['2023-05-08 14:30',
+                          '2023-05-08 15:45', '2023-05-08 16:00']}
+    df = pd.DataFrame(data)
+
+    # Convert the 'Timestamp' column to datetime
+    df['Timestamp'] = pd.to_datetime(df['Timestamp'])
+
+    # Localizing datetimes to UTC
+    localized_dt = df['Timestamp'].dt.tz_localize('UTC')
+    print("Localized to UTC:")
+    print(localized_dt)
+
+    # Converting time zones to America/New_York
+    converted_dt = localized_dt.dt.tz_convert('America/New_York')
+    print("\nConverted to America/New_York Timezone:")
+    print(converted_dt)
+
+
+if __name__ == "__main__":
+    main()
 ```
+
+![image](https://github.com/luiscoco/Python_Pandas/assets/32194879/14bf2acd-d4fc-42df-868b-2f508e67ecd2)
 
 ## 14. Memory Optimization:
 
 Pandas provides methods to optimize memory usage, which can be helpful when working with large datasets
 
 ```python
-# Optimizing memory usage
-df_optimized = df.copy()
-df_optimized['Category'] = df_optimized['Category'].astype('category')
+import pandas as pd
+
+def load_and_optimize(path):
+    # Load the data
+    df = pd.read_csv(path)
+    print("Memory usage before optimization:")
+    print(df.memory_usage(deep=True))
+
+    # Optimize memory usage by converting 'Category' to 'category' type
+    df['Category'] = df['Category'].astype('category')
+
+    print("\nMemory usage after optimization:")
+    print(df.memory_usage(deep=True))
+
+    return df
+
+if __name__ == "__main__":
+    # Path to the CSV file
+    path = 'sampleData.csv'
+    optimized_df = load_and_optimize(path)
+    print("\nOptimized DataFrame:")
+    print(optimized_df)
 ```
+
+![image](https://github.com/luiscoco/Python_Pandas/assets/32194879/3bf43965-fb56-4748-bb94-4b8f49d459e7)
 
 ## 15. Handling MultiIndex DataFrames:
 

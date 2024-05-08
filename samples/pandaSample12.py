@@ -2,10 +2,8 @@ import pandas as pd
 
 # Define a custom function to square values
 
-
 def square(x):
     return x ** 2
-
 
 # Create a sample DataFrame
 data = {
