@@ -222,10 +222,13 @@ Pandas provides methods to optimize memory usage, which can be helpful when work
 # Optimizing memory usage
 df_optimized = df.copy()
 df_optimized['Category'] = df_optimized['Category'].astype('category')
-Handling MultiIndex DataFrames:
-Pandas supports hierarchical indexing (MultiIndex), allowing you to work with higher-dimensional data more efficiently.
-python
-Copy code
+```
+
+## 15. Handling MultiIndex DataFrames:
+
+Pandas supports hierarchical indexing (MultiIndex), allowing you to work with higher-dimensional data more efficiently
+
+```python
 # Creating a MultiIndex DataFrame
 arrays = [['A', 'A', 'B', 'B'], [1, 2, 1, 2]]
 multi_index = pd.MultiIndex.from_arrays(arrays, names=('First', 'Second'))
@@ -233,10 +236,13 @@ df_multiindex = pd.DataFrame({'Values': [1, 2, 3, 4]}, index=multi_index)
 
 # Accessing data with MultiIndex
 value = df_multiindex.loc[('A', 1), 'Values']
-Working with JSON Data:
-Pandas can handle JSON data efficiently, allowing you to read JSON files or convert JSON strings to DataFrame objects.
-python
-Copy code
+```
+
+## 16. Working with JSON Data:
+
+Pandas can handle JSON data efficiently, allowing you to read JSON files or convert JSON strings to DataFrame objects
+
+```python
 # Reading JSON data
 df_json = pd.read_json('data.json')
 
@@ -244,10 +250,13 @@ df_json = pd.read_json('data.json')
 import json
 json_data = '{"Name": "Alice", "Age": 30}'
 df_from_json = pd.read_json(json_data, typ='series')
-Interoperability with NumPy and SciPy:
-Pandas seamlessly interoperates with NumPy and SciPy, allowing you to convert between DataFrame and NumPy array or SciPy sparse matrix.
-python
-Copy code
+```
+
+## 17. Interoperability with NumPy and SciPy:
+
+Pandas seamlessly interoperates with NumPy and SciPy, allowing you to convert between DataFrame and NumPy array or SciPy sparse matrix
+
+```python
 # Converting DataFrame to NumPy array
 numpy_array = df.values
 
@@ -257,17 +266,17 @@ df_from_array = pd.DataFrame(numpy_array, columns=['A', 'B', 'C'])
 # Converting DataFrame to SciPy sparse matrix
 from scipy.sparse import csr_matrix
 sparse_matrix = csr_matrix(df.values)
-These advanced features extend the capabilities of Pandas for handling various data manipulation tasks effectively. Experimenting with these features in VSCode with different datasets will enhance your data analysis skills.
+```
 
-User
-please provide me more advance complex samples
-ChatGPT
-Certainly! Let's dive into some more advanced and complex examples using Pandas:
+These advanced features extend the capabilities of Pandas for handling various data manipulation tasks effectively
 
-Time Series Analysis:
-Conducting time series analysis often involves resampling, shifting, and rolling window calculations.
-python
-Copy code
+Experimenting with these features in VSCode with different datasets will enhance your data analysis skills
+
+## 18. Time Series Analysis:
+
+Conducting time series analysis often involves resampling, shifting, and rolling window calculations
+
+```python
 # Generating time series data
 import numpy as np
 date_range = pd.date_range(start='2024-01-01', end='2024-12-31', freq='D')
@@ -281,10 +290,13 @@ shifted_data = time_series.shift(1)
 
 # Calculating rolling mean over a window of 7 days
 rolling_mean = time_series.rolling(window=7).mean()
-Handling Large Datasets:
-When working with large datasets, memory optimization and efficient processing become crucial.
-python
-Copy code
+```
+
+## 19. Handling Large Datasets:
+
+When working with large datasets, memory optimization and efficient processing become crucial
+
+```python
 # Reading large dataset in chunks
 chunk_size = 100000
 chunk_iter = pd.read_csv('large_data.csv', chunksize=chunk_size)
@@ -293,10 +305,13 @@ for chunk in chunk_iter:
 
 # Optimizing memory usage
 df['Category'] = df['Category'].astype('category')
-Combining Data from Multiple Sources:
-Integrating data from different sources and formats can require complex merging and joining operations.
-python
-Copy code
+```
+
+## 20. Combining Data from Multiple Sources:
+
+Integrating data from different sources and formats can require complex merging and joining operations
+
+```python
 # Merging data from multiple CSV files
 file1 = pd.read_csv('data1.csv')
 file2 = pd.read_csv('data2.csv')
@@ -307,10 +322,13 @@ import sqlite3
 conn = sqlite3.connect('database.db')
 query = "SELECT * FROM table1 JOIN table2 ON table1.key = table2.key"
 sql_data = pd.read_sql_query(query, conn)
-Handling Hierarchical Data:
-Working with hierarchical or nested data structures requires advanced indexing and manipulation techniques.
-python
-Copy code
+```
+
+## 21. Handling Hierarchical Data:
+
+Working with hierarchical or nested data structures requires advanced indexing and manipulation techniques
+
+```python
 # Creating a MultiIndex DataFrame
 arrays = [['A', 'A', 'B', 'B'], [1, 2, 1, 2]]
 multi_index = pd.MultiIndex.from_arrays(arrays, names=('First', 'Second'))
@@ -318,20 +336,26 @@ df_multiindex = pd.DataFrame({'Values': [1, 2, 3, 4]}, index=multi_index)
 
 # Aggregating data at different levels of MultiIndex
 level_mean = df_multiindex.groupby(level='First').mean()
-Handling Outliers and Anomalies:
-Identifying and handling outliers and anomalies in data requires advanced statistical techniques.
-python
-Copy code
+```
+
+## 22. Handling Outliers and Anomalies:
+
+Identifying and handling outliers and anomalies in data requires advanced statistical techniques
+
+```python
 # Detecting outliers using z-score
 from scipy.stats import zscore
 outliers = df[(np.abs(zscore(df['Values'])) > 3)]
 
 # Removing outliers
 clean_data = df[(np.abs(zscore(df['Values'])) < 3)]
-Advanced Data Visualization:
-Visualizing complex relationships in data often requires advanced plotting techniques.
-python
-Copy code
+```
+
+## 23. Advanced Data Visualization:
+
+Visualizing complex relationships in data often requires advanced plotting techniques
+
+```python
 # Plotting correlation matrix
 import seaborn as sns
 correlation_matrix = df.corr()
@@ -341,4 +365,8 @@ sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm')
 from statsmodels.tsa.seasonal import seasonal_decompose
 decomposition = seasonal_decompose(time_series, model='additive')
 decomposition.plot()
-These examples showcase the versatility of Pandas for handling various data analysis tasks, from time series analysis to data integration and outlier detection. Experimenting with these examples in VSCode with real-world datasets will deepen your understanding of Pandas and enhance your data analysis skills.
+```
+
+These examples showcase the versatility of Pandas for handling various data analysis tasks, from time series analysis to data integration and outlier detection
+
+Experimenting with these examples in VSCode with real-world datasets will deepen your understanding of Pandas and enhance your data analysis skills
