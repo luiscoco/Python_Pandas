@@ -281,12 +281,65 @@ Eva,A,30
 Pandas provides functions to reshape data, such as pivoting, melting, stacking, and unstacking
 
 ```python
-# Pivoting
-pivot_table = df.pivot_table(index='Date', columns='Category', values='Value')
+import pandas as pd
 
-# Melting
-melted_df = pd.melt(df, id_vars=['ID'], value_vars=['A', 'B', 'C'], var_name='Variable', value_name='Value')
+# Function to create a sample CSV file
+
+
+def create_sample_csv():
+    data = {
+        'Date': ['2023-05-01', '2023-05-01', '2023-05-02', '2023-05-02'],
+        'Category': ['A', 'B', 'A', 'B'],
+        'Value': [100, 200, 150, 250],
+        'ID': [1, 1, 2, 2]
+    }
+    df = pd.DataFrame(data)
+    df.to_csv('sample_data.csv', index=False)
+
+# Function to read data and perform pivoting and melting
+
+
+def process_data():
+    df = pd.read_csv('sample_data.csv')
+
+    # Pivoting
+    pivot_table = df.pivot_table(
+        index='Date', columns='Category', values='Value')
+    print("Pivot Table:")
+    print(pivot_table)
+
+    # Melting - revised to melt the DataFrame properly
+    melted_df = pd.melt(df, id_vars=['ID', 'Date'], value_vars=[
+                        'Value'], var_name='Category', value_name='NumericValue')
+    print("\nMelted DataFrame:")
+    print(melted_df)
+
+    # Save the pivot table and melted DataFrame to CSV
+    pivot_table.to_csv('pivot_table.csv')
+    melted_df.to_csv('melted_data.csv')
+
+
+
+def main():
+    create_sample_csv()
+    process_data()
+
+
+if __name__ == "__main__":
+    main()
 ```
+
+**sample_data.csv**
+
+```csv
+Date,Category,Value,ID
+2023-05-01,A,100,1
+2023-05-01,B,200,1
+2023-05-02,A,150,2
+2023-05-02,B,250,2
+```
+
+![image](https://github.com/luiscoco/Python_Pandas/assets/32194879/873d9867-630e-4871-9882-7b47a4548306)
 
 ## 8. Time Series Data Handling:
 
