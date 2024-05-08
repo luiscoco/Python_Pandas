@@ -644,28 +644,98 @@ if __name__ == "__main__":
 Pandas supports hierarchical indexing (MultiIndex), allowing you to work with higher-dimensional data more efficiently
 
 ```python
-# Creating a MultiIndex DataFrame
-arrays = [['A', 'A', 'B', 'B'], [1, 2, 1, 2]]
-multi_index = pd.MultiIndex.from_arrays(arrays, names=('First', 'Second'))
-df_multiindex = pd.DataFrame({'Values': [1, 2, 3, 4]}, index=multi_index)
+import pandas as pd
 
-# Accessing data with MultiIndex
-value = df_multiindex.loc[('A', 1), 'Values']
+def create_multiindex_dataframe():
+    # Creating a MultiIndex DataFrame
+    arrays = [['A', 'A', 'B', 'B'], [1, 2, 1, 2]]
+    multi_index = pd.MultiIndex.from_arrays(arrays, names=('First', 'Second'))
+    df_multiindex = pd.DataFrame({'Values': [1, 2, 3, 4]}, index=multi_index)
+    return df_multiindex
+
+def access_data(df_multiindex):
+    # Accessing data with MultiIndex
+    value = df_multiindex.loc[('A', 1), 'Values']
+    return value
+
+def main():
+    # Creating and displaying the DataFrame
+    df_multiindex = create_multiindex_dataframe()
+    print("MultiIndex DataFrame:")
+    print(df_multiindex)
+
+    # Accessing and displaying a specific value
+    value = access_data(df_multiindex)
+    print("\nAccessed Value for ('A', 1):", value)
+
+if __name__ == "__main__":
+    main()
 ```
+
+![image](https://github.com/luiscoco/Python_Pandas/assets/32194879/0756d080-c423-45bf-aa6e-2ecc700eda3f)
 
 ## 16. Working with JSON Data:
 
 Pandas can handle JSON data efficiently, allowing you to read JSON files or convert JSON strings to DataFrame objects
 
 ```python
-# Reading JSON data
-df_json = pd.read_json('data.json')
-
-# Converting JSON string to DataFrame
+import pandas as pd
 import json
-json_data = '{"Name": "Alice", "Age": 30}'
-df_from_json = pd.read_json(json_data, typ='series')
+
+def read_json_file(file_path):
+    """ Reads a JSON file and converts it to a pandas DataFrame. """
+    try:
+        df = pd.read_json(file_path)
+        print("DataFrame from JSON file:")
+        print(df)
+    except Exception as e:
+        print("Error reading JSON file:", e)
+
+def json_string_to_df(json_str):
+    """ Converts a JSON string to a pandas DataFrame. """
+    try:
+        # Convert JSON string to dictionary
+        json_dict = json.loads(json_str)
+        # Convert dictionary to DataFrame
+        df = pd.DataFrame([json_dict])
+        print("DataFrame from JSON string:")
+        print(df)
+    except Exception as e:
+        print("Error converting JSON string to DataFrame:", e)
+
+if __name__ == "__main__":
+    # Path to the JSON file
+    json_file_path = 'data.json'
+    # JSON string
+    json_string = '{"Name": "Alice", "Age": 30}'
+
+    # Read JSON from file
+    read_json_file(json_file_path)
+
+    # Convert JSON string to DataFrame
+    json_string_to_df(json_string)
 ```
+
+**data.json**
+
+```json
+[
+    {
+        "Name": "Alice",
+        "Age": 30
+    },
+    {
+        "Name": "Bob",
+        "Age": 25
+    },
+    {
+        "Name": "Charlie",
+        "Age": 35
+    }
+]
+```
+
+![image](https://github.com/luiscoco/Python_Pandas/assets/32194879/5618aadd-fb70-4487-918b-fafcbc817606)
 
 ## 17. Interoperability with NumPy and SciPy:
 
