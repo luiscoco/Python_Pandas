@@ -742,20 +742,45 @@ if __name__ == "__main__":
 Pandas seamlessly interoperates with NumPy and SciPy, allowing you to convert between DataFrame and NumPy array or SciPy sparse matrix
 
 ```python
-# Converting DataFrame to NumPy array
-numpy_array = df.values
-
-# Converting NumPy array to DataFrame
-df_from_array = pd.DataFrame(numpy_array, columns=['A', 'B', 'C'])
-
-# Converting DataFrame to SciPy sparse matrix
+import pandas as pd
+import numpy as np
 from scipy.sparse import csr_matrix
-sparse_matrix = csr_matrix(df.values)
+
+def main():
+    # Create a sample DataFrame
+    data = {
+        'A': [1, 2, 3],
+        'B': [4, 5, 6],
+        'C': [7, 8, 9]
+    }
+    df = pd.DataFrame(data)
+    print("Original DataFrame:")
+    print(df)
+    print("\n")
+
+    # Converting DataFrame to NumPy array
+    numpy_array = df.values
+    print("Converted NumPy Array:")
+    print(numpy_array)
+    print("\n")
+
+    # Converting NumPy array back to DataFrame
+    df_from_array = pd.DataFrame(numpy_array, columns=['A', 'B', 'C'])
+    print("DataFrame from NumPy Array:")
+    print(df_from_array)
+    print("\n")
+
+    # Converting DataFrame to SciPy sparse matrix
+    sparse_matrix = csr_matrix(df.values)
+    print("SciPy Sparse Matrix:")
+    print(sparse_matrix)
+    print("\n")
+
+if __name__ == "__main__":
+    main()
 ```
 
-These advanced features extend the capabilities of Pandas for handling various data manipulation tasks effectively
-
-Experimenting with these features in VSCode with different datasets will enhance your data analysis skills
+![image](https://github.com/luiscoco/Python_Pandas/assets/32194879/33179a3a-2f7f-46cd-a316-04745c92e9ac)
 
 ## 18. Time Series Analysis:
 
