@@ -552,12 +552,28 @@ Bob Johnson,Text without the new_value.,bob.johnson@test.com,"['Bob', 'Johnson']
 You can apply custom or built-in functions element-wise to DataFrame columns or rows using the apply() method
 
 ```python
-# Applying a custom function
+import pandas as pd
+
+# Define a custom function to square values
+
 def square(x):
     return x ** 2
 
+# Create a sample DataFrame
+data = {
+    'Name': ['Alice', 'Bob', 'Charlie', 'David', 'Eva'],
+    'Age': [25, 30, 35, 40, 45]
+}
+df = pd.DataFrame(data)
+
+# Apply the square function to the 'Age' column
 df['Age_squared'] = df['Age'].apply(square)
+
+# Display the original DataFrame and the new column
+print(df)
 ```
+
+![image](https://github.com/luiscoco/Python_Pandas/assets/32194879/c36c4a29-19c9-45f6-b432-81a9b616669c)
 
 ## 13. Handling Time Zones:
 
