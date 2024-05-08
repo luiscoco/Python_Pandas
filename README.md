@@ -51,6 +51,8 @@ young_people = df[df['Age'] < 30]
 print(young_people)
 ```
 
+**Book1.csv**
+
 ```csv
 Age
 1
@@ -150,7 +152,6 @@ Pandas provides methods to handle missing or NaN (Not a Number) values, includin
 ```python
 import pandas as pd
 
-
 def clean_data(input_file, output_file):
     # Read data from CSV
     df = pd.read_csv(input_file)
@@ -175,7 +176,7 @@ def clean_data(input_file, output_file):
 
 
 def main():
-    input_file = 'input_data.csv'  # Replace with the path to your input CSV file
+    input_file = 'input_data1.csv'  # Replace with the path to your input CSV file
     output_file = 'cleaned_data.csv'  # Replace with the desired output CSV file name
 
     clean_data(input_file, output_file)
@@ -183,6 +184,16 @@ def main():
 
 if __name__ == "__main__":
     main()
+```
+
+**input_data1.csv**
+
+```csv
+Name,Age,Gender,Score
+Alice,25,Female,85
+Bob,,Male,90
+Charlie,35,Male,
+Diana,28,Female,
 ```
 
 ## 6. Grouping and Aggregating Data:
@@ -246,6 +257,17 @@ def main():
 
 if __name__ == "__main__":
     main()
+```
+
+**input_data2.csv**
+
+```csv
+Name,Category,Value
+Alice,A,10
+Bob,B,15
+Charlie,A,20
+Diana,B,25
+Eva,A,30
 ```
 
 ## 7. Reshaping Data:
