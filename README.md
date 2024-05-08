@@ -885,15 +885,39 @@ Freq: D, Length: 366, dtype: float64
 When working with large datasets, memory optimization and efficient processing become crucial
 
 ```python
-# Reading large dataset in chunks
-chunk_size = 100000
-chunk_iter = pd.read_csv('large_data.csv', chunksize=chunk_size)
-for chunk in chunk_iter:
-    process_chunk(chunk)
+import pandas as pd
 
-# Optimizing memory usage
-df['Category'] = df['Category'].astype('category')
+# Function to process each chunk
+
+def process_chunk(chunk):
+    # Placeholder for processing logic. Modify this according to your needs.
+    # For example, you might want to print the first few rows of each chunk:
+    print(chunk.head())
+
+def read_and_process_in_chunks(file_path, chunk_size):
+    # Reading the CSV file in chunks
+    chunk_iter = pd.read_csv(file_path, chunksize=chunk_size)
+
+    for chunk in chunk_iter:
+        # Optionally, optimize memory usage for specific columns
+        if 'Category' in chunk.columns:
+            chunk['Category'] = chunk['Category'].astype('category')
+
+        # Process each chunk
+        process_chunk(chunk)
+
+if __name__ == "__main__":
+    # File path for the large dataset
+    file_path = 'large_data.csv'
+
+    # Size of each chunk
+    chunk_size = 100000
+
+    # Function call to read and process the file
+    read_and_process_in_chunks(file_path, chunk_size)
 ```
+
+![image](https://github.com/luiscoco/Python_Pandas/assets/32194879/a79926b0-b4e8-4f15-9b95-dda5939d3db8)
 
 ## 20. Combining Data from Multiple Sources:
 
