@@ -1,0 +1,4 @@
+Name,Text,Email,Name_split,Email_username,Email_domain
+John Doe,This is some text with new_value.,john.doe@example.com,"['John', 'Doe']",doe,example.com
+Jane Smith,Another text with new_value to replace.,jane.smith@sample.com,"['Jane', 'Smith']",smith,sample.com
+Bob Johnson,Text without the new_value.,bob.johnson@test.com,"['Bob', 'Johnson']",johnson,test.com

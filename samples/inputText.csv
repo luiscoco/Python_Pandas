@@ -1,0 +1,4 @@
+Name,Text,Email
+John Doe, This is some text with old_value. ,john.doe@example.com
+Jane Smith,Another text with old_value to replace.,jane.smith@sample.com
+Bob Johnson,  Text without the old_value. ,bob.johnson@test.com
