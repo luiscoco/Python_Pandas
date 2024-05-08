@@ -787,19 +787,97 @@ if __name__ == "__main__":
 Conducting time series analysis often involves resampling, shifting, and rolling window calculations
 
 ```python
-# Generating time series data
 import numpy as np
-date_range = pd.date_range(start='2024-01-01', end='2024-12-31', freq='D')
-time_series = pd.Series(np.random.randn(len(date_range)), index=date_range)
+import pandas as pd
 
-# Resampling to monthly frequency
-monthly_data = time_series.resample('M').mean()
+def generate_time_series():
+    # Generating time series data
+    date_range = pd.date_range(start='2024-01-01', end='2024-12-31', freq='D')
+    time_series = pd.Series(np.random.randn(len(date_range)), index=date_range)
+    return time_series
 
-# Shifting data by a certain number of periods
-shifted_data = time_series.shift(1)
+def resample_monthly(time_series):
+    # Resampling to monthly frequency
+    monthly_data = time_series.resample('M').mean()
+    return monthly_data
 
-# Calculating rolling mean over a window of 7 days
-rolling_mean = time_series.rolling(window=7).mean()
+def shift_data(time_series):
+    # Shifting data by one period
+    shifted_data = time_series.shift(1)
+    return shifted_data
+
+def calculate_rolling_mean(time_series):
+    # Calculating rolling mean over a window of 7 days
+    rolling_mean = time_series.rolling(window=7).mean()
+    return rolling_mean
+
+if __name__ == "__main__":
+    # Generate time series data
+    time_series = generate_time_series()
+
+    # Resample data to monthly frequency
+    monthly_data = resample_monthly(time_series)
+
+    # Shift the data by one period
+    shifted_data = shift_data(time_series)
+
+    # Calculate rolling mean over a 7-day window
+    rolling_mean = calculate_rolling_mean(time_series)
+
+    # Print the results
+    print("Monthly Data:")
+    print(monthly_data)
+    print("\nShifted Data:")
+    print(shifted_data)
+    print("\nRolling Mean (7 days):")
+    print(rolling_mean)
+```
+
+**output**
+
+```
+Monthly Data:
+2024-01-31    0.160074  
+2024-02-29   -0.311636  
+2024-03-31    0.234325  
+2024-04-30    0.185597  
+2024-05-31    0.261043  
+2024-06-30   -0.026390  
+2024-07-31    0.083969  
+2024-08-31    0.009491  
+2024-09-30   -0.168149  
+2024-10-31    0.413047  
+2024-11-30    0.176617  
+2024-12-31    0.216555  
+Freq: ME, dtype: float64
+
+Shifted Data:
+2024-01-01         NaN  
+2024-01-02    0.972091  
+2024-01-03   -0.170409  
+2024-01-04    1.480312
+2024-01-05    0.573221
+                ...
+2024-12-27    0.111897
+2024-12-28    0.399308
+2024-12-29    0.391102
+2024-12-30   -0.185530
+2024-12-31   -1.906845
+Freq: D, Length: 366, dtype: float64
+
+Rolling Mean (7 days):
+2024-01-01         NaN
+2024-01-02         NaN
+2024-01-03         NaN
+2024-01-04         NaN
+2024-01-05         NaN
+                ...
+2024-12-27    0.522674
+2024-12-28    0.524076
+2024-12-29    0.191457
+2024-12-30   -0.025446
+2024-12-31   -0.327884
+Freq: D, Length: 366, dtype: float64
 ```
 
 ## 19. Handling Large Datasets:
